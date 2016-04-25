@@ -16,14 +16,6 @@ class CommonQueries extends StartDB
     {   
         return parent::DBConnect();
     }
-
-    public function queryBlueprint($sql)
-    {
-       $db = $this->newQuery();
-       $prepare = $db->prepare($sql);
-       $prepare->execute();
-    }
-
     public function exceptionMessage()
     {
         return array(
@@ -33,7 +25,6 @@ class CommonQueries extends StartDB
 
             );
     }
-    
     protected function checkResultSet($array)
     {
         if( !empty($array) and $array !== false ) 
@@ -44,19 +35,6 @@ class CommonQueries extends StartDB
             throw new Exception($this->exceptionMessage()['empty']);
         }
     }
-  /*  public function fetchAlls()
-    {
-        $query = $this->newQuery()
-                 ->select("*")
-                 ->from($this->table)
-                 ->execute();
-                 $result = $query->fetchAll();  
-         if( $this->checkResultSet($result) )
-        {
-            return $result;
-        }
-    }
-    */
     public function fetchAllsCond($where, $condition, $operator = '=', $orderBy = null)
     {
         if(!isset($where, $condition))
@@ -86,20 +64,6 @@ class CommonQueries extends StartDB
             return $result;
         }
     }
-    /*
-    public function fetchOneRow()
-    {
-        $query = $this->newQuery()
-                 ->select('username, country')
-                 ->from($this->table)
-                 ->execute();
-                 $result = $query->fetch(PDO::FETCH_ASSOC);
-        if( $this->checkResultSet($result) )
-        {
-            return $result;
-        }
-    }
-    */
     public function fetchOneRowWithCond($where, $condition, $operator = '=')
     {
         if(!isset($where, $condition))
@@ -178,35 +142,4 @@ class CommonQueries extends StartDB
     {
         $sql = sprintf("INSERT INTO %s VALUES(?,");
     }
-     /*
-    public function deleteOne($where, $condition)
-    {
-        if(!isset($where, $condition))
-        {
-            throw new Exception("deleteOne method expects two parameters!");  
-        }
-        $query = $this->newQuery()
-             ->delete('reactions')
-             ->where($where.' = ?')
-             ->setParameter(0, $condition)   
-             ->execute();
-         if(!$query)
-         {
-            throw new Exception($this->exceptionMessage()['couldNotDelete']);  
-        }
-    }   */
-
 }
-
-
-/*try 
-{
-    $f = new CommonQueries();
-    echo '<pre>';
-    var_dump( $f->queryBlueprint("SELECT * FROM"));
-    echo '</pre>';
-}catch(Exception $e)
-{
-    printf("%s  %s", $e->getMessage(), __FILE__);
-}
-*/
