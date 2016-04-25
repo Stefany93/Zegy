@@ -1,0 +1,7 @@
+  <tr>
+             <td><a href=profile.php?id=<?php print $msg['id']; ?> ><?php print $msg['sender']; ?></a></td>
+            <td><a href=view_message.php?message_id=<?php print $msg['id']; ?>>Messsage from <?php echo $msg['sender'];?></a></td>
+            <td><?php print date('M d Y',$msg['date_send']); ?></td>
+        </tr>
+    <?php } }catch(PDOException $e){echo $e;} ?>
+    </table>

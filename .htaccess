@@ -1,0 +1,65 @@
+# We are disabling the default directory view
+# because it might imperil our security.
+
+#Options -Indexes
+
+
+
+# We are re - writing the URLs that point to the files
+# index.php, portfolio.php, blog.php, contact.php, links.php, about.php
+# to their homonymous names, without the .php prefix,
+# except index which we turn into home, so that we can hide
+# the names of the files we are using
+# to show content to the user.
+# Because otherwise it would be lame... 
+
+#php_flag magic_quotes_gpc Off
+
+DirectorySlash Off
+RewriteEngine On
+#RewriteBase /
+#RewriteRule !images - [F]
+
+RewriteRule ^home/?$ index.php [NC]
+RewriteRule ^portfolio/?$ portfolio.php [NC]
+RewriteRule ^blog/?$ blog.php [NC]
+RewriteRule ^contact/?$ contact.php [NC]
+RewriteRule ^links/?$ links.php [NC]
+RewriteRule ^about/?$ about.php [NC]
+RewriteRule ^wordpress-plugins/?$ wp_plugins.php [NC]
+RewriteRule ^register/?$ register.php [NC]
+
+RewriteRule ^register/?$ register.php [NC]
+#Re-writing the category menu query strings
+
+RewriteRule ^show-topics/.*([0-9]+)$ show_topics.php?id=$1
+RewriteRule ^show-(posts)/.*([0-9]+)$ show_$1.php?id=$2
+RewriteRule ^(view)-(posts)/.*([0-9]+)$ $1_$2.php?id=$3
+RewriteRule ^(topic)/.*/([0-9]+)$ single_$1.php?topic_id=$2 [L]
+RewriteRule ^(private)-(messages)/.*([0-9]+)$ $1_$2.php?id=$3
+RewriteRule ^user/.*([0-9]+)$ profile.php?id=$1
+RewriteRule ^([0-9]+)/.* topics.php?category_id=$1
+
+# Here we re - write the ?blog_post=? query strings
+# because the way they are now is just plain lame...
+
+RewriteRule ^([0-9]+)-.+$ blog.php?blog_post=$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# NEVER cache the website
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
+</IfModule>
+
+#AuthName "Restricted Area" 
+
+#AuthType Basic 
+
+#AuthUserFile /home/users/web/b2248/moo.wildvisionsinfo/dyulgerovainfo/projects/vughs/.htpasswd
+
+#require valid-user
