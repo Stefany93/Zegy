@@ -22,25 +22,6 @@ class Profile extends CommonQueries
     {
         return true;
     }
-    public function sendPrivateMessage($sender_id, $receiver_id, $message)
-    {
-        extract($message);
-        $query = $this->newQuery()
-                      ->insert('private_messages')
-                      ->values(
-                                array(
-                                     'sender_id' => '?',
-                                     'receiver_id' => '?',
-                                     'message' => '?',
-                                     'date_send' => "STRFTIME('%s','now')"
-                                    )
-                               )
-                        ->setParameter(0, $sender_id)
-                        ->setParameter(1, $receiver_id)
-                        ->setParameter(2, $message)
-                        ->execute();
-        return true;
-    }
     public function listPrivateMessages()
     {
         return parent::fetchAllsCond('receiver_id', $this->userId);
