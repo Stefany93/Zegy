@@ -107,8 +107,6 @@ class CommonQueries extends StartDB
     }
     public function insert($values_array, $num_values)
     {
-        /*$values_array = array('comment' => 'this is a comment', 'user_id' => '2', 'topic_id' => '15', 'date_posted' => '1212121212');
-        $num_values = 4;*/
         print_r($values_array);
         $k = (array_keys($values_array));
         $ki =  implode(',', $k);
@@ -134,12 +132,49 @@ class CommonQueries extends StartDB
         }
 
     }
-    public function insertTwo()
+    public function replace($values_array, $num_values)
     {
-        $sql = sprintf("INSERT INTO %s VALUES(?,");
+        print_r($values_array);
+        $k = (array_keys($values_array));
+        $ki =  implode(',', $k);
+        $question_marks = array_fill(1, $num_values, '?');
+        $question_marks_string =  implode(',', $question_marks);
+        $i = 0; 
+        $sql = sprintf("REPLACE INTO %s(%s) VALUES(%s)",  $this->table, $ki, $question_marks_string);
+       $query = $this->newQuery();
+        $prepare = $query->prepare($sql);
+        if(!is_object($prepare))
+        {
+            throw new Exception("Could not execute the query!  $sql", 1);
+            
+        }
+        foreach ($values_array as &$value) {
+            $i++;
+            $prepare->bindParam($i, $value);
+        }
+        if(!$prepare->execute())
+        {
+            throw new Exception("Could not execute an insert query! $sql", 1);
+            
+        }
+
     }
-    public function insertThree()
+
+    // Delete
+
+    public function delete($condition1, $condition2)
     {
-        $sql = sprintf("INSERT INTO %s VALUES(?,");
+        $sql = sprintf("DELETE FROM %s WHERE %s = %s ", $this->table, $condition1, $condition2);
+        $query = $this->newQuery();
+        $prepare = $query->prepare($sql);
+        if(!is_object($prepare))
+        {
+            throw new Exception("Could not execute the query!  $sql", 1);   
+        }
+        if(!$prepare->execute())
+        {
+            throw new Exception("Could not execute an ".__FUNCTION__." query! $sql", 1);
+            
+        }
     }
 }

@@ -3,6 +3,7 @@
 	$posts->setTable('categories');
 	$categories = $posts->getCategories();
 	$posts->setTable('posts');
+	
 ?>
 		<table id="first_page">
 				<tbody>
