@@ -45,7 +45,7 @@
 // Please see http://code.google.com/p/phpliteadmin/wiki/Configuration for more details
 
 //password to gain access
-$password = 'Andromeda12!';
+$password = '12345';
 
 // Theme! If you want to change theme, save the CSS file in same folder of phpliteadmin or in folder 'themes'
 $theme = 'phpliteadmin.css';
