@@ -1,11 +1,5 @@
 <?php
 
-  abstract public bool close ( void )
-abstract public bool destroy ( string $session_id )
-abstract public bool gc ( int $maxlifetime )
-abstract public bool open ( string $save_path , string $name )
-abstract public string read ( string $session_id )
-abstract public bool write ( string $session_id , string $session_data )
     class Session extends CommonQueries implements SessionHandlerInterface
     {
         protected $sessionName;
@@ -54,11 +48,7 @@ abstract public bool write ( string $session_id , string $session_data )
 //filemtime($file) + $maxlifetime < time()
     public function gc($maxlifetime)
     {
-        foreach (glob("$this->savePath/sess_*") as $file) {
-            if (filemtime($file) + $maxlifetime < time() && file_exists($file)) {
-                unlink($file);
-            }
-        }
+        // garbage collector
 
         return true;
     }
@@ -86,10 +76,3 @@ abstract public bool write ( string $session_id , string $session_data )
         return $this;
     }
 }
-
-/*
-  Session class by Stephen McIntyre
-  http://stevedecoded.com
-*/
-
-
