@@ -3,7 +3,19 @@
 	$posts->setTable('categories');
 	$categories = $posts->getCategories();
 	$posts->setTable('posts');
-	
+	try
+	{
+		//$session = new Session();
+		Session::set('lol', 12);
+		echo Session::get('lol');
+	//	session_destroy();
+	}catch(Exception $e)
+	{
+    	printf("%s on line %s file %s", $e->getMessage(),  $e->getLine(), $e->getFile() );
+	}catch(PDOException $e)
+	{
+		printf("%s on line %s file %s", $e->getMessage(), $e->getLine(), $e->getFile() );
+	}
 ?>
 		<table id="first_page">
 				<tbody>

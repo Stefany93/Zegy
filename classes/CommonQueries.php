@@ -162,9 +162,9 @@ class CommonQueries extends StartDB
 
     // Delete
 
-    public function delete($condition1, $condition2)
+    public function delete($condition1, $condition2, $operator = '=')
     {
-        $sql = sprintf("DELETE FROM %s WHERE %s = %s ", $this->table, $condition1, $condition2);
+        $sql = sprintf("DELETE FROM %s WHERE %s $operator %s ", $this->table, $condition1, $condition2);
         $query = $this->newQuery();
         $prepare = $query->prepare($sql);
         if(!is_object($prepare))

@@ -39,6 +39,7 @@ try
     printf("%s  %s", $e->getMessage(), $e->getFile());
 }
 
+echo Session::get('lol');
     
 ?>
 

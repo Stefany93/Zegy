@@ -7,7 +7,11 @@
     });
 // Report all PHP errors
 error_reporting(-1);
-session_start();
+//session_start();
+/*ini_set('session.save_handler', 'sqlite3');
+ini_set('session.save_path', '/db/sessions.db');*/
+        session_start();
+
 $_SESSION['session_user_id'] = 1;
 $_SESSION['username'] = 'Jane';
 ?>
