@@ -17,12 +17,16 @@ try
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
     $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
-    
+
     $validate = new Validate('lol', 'post');
     $validate->setData($data);
     $validate->setRequired( array('comment') );
     $validate->checkMissing( array('url') );
     $validate->checkLength( 'comment', 5, 10 );
+
+    $customDateTime = new CustomDateTime();
+    $customDateTime->setTimestamp($date);
+    echo $date;
     print_r( $validate->getMissing() );
     foreach ($validate->getErrors() as $error)
      {
@@ -58,7 +62,7 @@ echo Session::get('lol');
            <!--  <hr></hr> -->
         <ul id="post_data">
             <li id="post_date">
-               <time><?php print date('M d Y',$date); ?></time>
+               <time><?php print $customDateTime->getDate(true); ?></time>
             </li>
             <hr>
         </ul>
