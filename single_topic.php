@@ -1,8 +1,10 @@
 <?php
      include 'html/header.php'; 
-
+     $mode = 'Development';
 try 
 {
+    
+
     $posts = new Posts();
     $posts->setTable("posts");
     $posts->setPostId( Validate::isNumericString('topic_id', 'get') );
@@ -13,7 +15,7 @@ try
     $comments->setPostId($id);
 
     $profile = new Profile();
-    $profile->setTable('users');
+    $profile->setTable('ussers');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
     $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
@@ -40,7 +42,8 @@ try
 
 }catch(Exception $e)
 {
-    printf("%s  %s", $e->getMessage(), $e->getFile());
+    $handleExceptions = new HandleExceptions($mode);
+   echo $handleExceptions->logOrDisplay($e);
 }
 
 echo Session::get('lol');
