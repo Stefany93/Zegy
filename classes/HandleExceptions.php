@@ -25,7 +25,7 @@
                              $exception->getFile(), $exception->getLine(), $exception->getMessage() );
         }
 
-        public function logOrDisplay($exception)
+        public function parseException($exception)
         {
             if($this->mode == 'Development')
             {

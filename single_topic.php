@@ -15,7 +15,7 @@ try
     $comments->setPostId($id);
 
     $profile = new Profile();
-    $profile->setTable('ussers');
+    $profile->setTable('users');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
     $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
@@ -43,10 +43,10 @@ try
 }catch(Exception $e)
 {
     $handleExceptions = new HandleExceptions($mode);
-   echo $handleExceptions->logOrDisplay($e);
+   echo $handleExceptions->parseException($e);
 }
 
-echo Session::get('lol');
+//echo Session::get('lol');
     
 ?>
 
