@@ -1,19 +1,21 @@
 <?php 
-//require 'config/global_variables.php'; 
-//require 'db/db.php';
-//require_once 'vendor/autoload.php';
+require 'config/constants.php'; 
+require 'config/global_vars.php'; 
+date_default_timezone_set("America/Chicago");
  spl_autoload_register(function ($class) {
-    include 'classes/' . $class . '.php';
+    if( strpos($class, 'Monolog') === false )
+    {
+      include 'classes/' . $class . '.php';
+    }
     });
+
 // Report all PHP errors
 error_reporting(-1);
-//session_start();
-/*ini_set('session.save_handler', 'sqlite3');
-ini_set('session.save_path', '/db/sessions.db');*/
-        session_start();
+session_start();
 
 $_SESSION['session_user_id'] = 1;
 $_SESSION['username'] = 'Jane';
+$handleExceptions = new HandleExceptions($mode);
 ?>
 <!DOCTYPE html>
 <html lang="en">

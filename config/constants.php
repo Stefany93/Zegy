@@ -2,7 +2,7 @@
     /*
     *   URLs
     */
-    define('PROFILE', 'profile');
-    define('INBOX', 'inbox');
+    define('DEV', 'dev.zegy');
+    define('PRODUCTION', 'historiatalk.com');
 
     

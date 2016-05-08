@@ -1,0 +1,2 @@
+[2016-05-07 21:01:38] error_log.ERROR: Exception thrown in file >>> C:\xampp\htdocs\my-projects\zegy\classes\CommonQueries.php <<<,   line >>> 75 <<<,   with the message >>> SQLSTATE[HY000]: General error: 1 no such table: ussers <<<  [] []
+[2016-05-07 21:02:13] error_log.ERROR: Exception thrown in file >>> C:\xampp\htdocs\my-projects\zegy\classes\CommonQueries.php <<<,   line >>> 75 <<<,   with the message >>> SQLSTATE[HY000]: General error: 1 no such table: ussers <<<  [] []

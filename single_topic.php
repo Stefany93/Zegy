@@ -1,6 +1,5 @@
 <?php
      include 'html/header.php'; 
-     $mode = 'Development';
 try 
 {
     
@@ -15,7 +14,7 @@ try
     $comments->setPostId($id);
 
     $profile = new Profile();
-    $profile->setTable('users');
+    $profile->setTable('ussers');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
     $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
@@ -42,11 +41,8 @@ try
 
 }catch(Exception $e)
 {
-    $handleExceptions = new HandleExceptions($mode);
    echo $handleExceptions->parseException($e);
 }
-
-//echo Session::get('lol');
     
 ?>
 

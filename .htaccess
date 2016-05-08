@@ -3,6 +3,8 @@
 
 #Options -Indexes
 
+#Adjust default time zone
+SetEnv TZ America/Phoenix
 
 
 # We are re - writing the URLs that point to the files
