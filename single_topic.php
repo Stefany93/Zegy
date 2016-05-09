@@ -14,7 +14,7 @@ try
     $comments->setPostId($id);
 
     $profile = new Profile();
-    $profile->setTable('ussers');
+    $profile->setTable('users');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
     $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
@@ -26,16 +26,15 @@ try
     $validate->checkLength( 'comment', 5, 10 );
 
     $customDateTime = new CustomDateTime();
-    $customDateTime->setTimestamp($date);
-    echo $date;
-    print_r( $validate->getMissing() );
+   
+     $customDateTime->setTimestamp($date);
+
     foreach ($validate->getErrors() as $error)
      {
         printf('<p class="error"> %s </p>', $error);
     }
     if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
     {
-        print_r($data);
         $comments->insertComment($data, count($data));
     }
 
@@ -61,7 +60,7 @@ try
            <!--  <hr></hr> -->
         <ul id="post_data">
             <li id="post_date">
-               <time><?php print $customDateTime->getDate(true); ?></time>
+               <time><?php print $customDateTime->getForumDate($date) ?></time>
             </li>
             <hr>
         </ul>
@@ -98,8 +97,9 @@ try
                             $profile->setUserId($comment['user_id']);
                             extract($profile->getUserInfo());                                                                                                          
                             include 'partials/user_info.php';
+                            $customDateTime->setTimestamp($comment['date_posted']);
                          ?>
-                        <h5><?php echo date('d F Y',$comment['date_posted']); ?></h5>
+                        <h5><?php echo $customDateTime->getForumDate(); ?></h5>
                         <p>
                             <?php echo $comment['comment']; ?>
                         </p>

@@ -11,10 +11,10 @@
 	//	session_destroy();
 	}catch(Exception $e)
 	{
-    	printf("%s on line %s file %s", $e->getMessage(),  $e->getLine(), $e->getFile() );
+    	$handleExceptions->parseException($e);
 	}catch(PDOException $e)
 	{
-		printf("%s on line %s file %s", $e->getMessage(), $e->getLine(), $e->getFile() );
+		$handleExceptions->parseException($e);
 	}
 ?>
 		<table id="first_page">

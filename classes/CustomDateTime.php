@@ -105,12 +105,12 @@ class CustomDateTime extends DateTime
         $this->_day = ( int ) $day;
     }
 
-    public function getDate($char_month = false, $style = '', $separator = '/')
+    public function getForumDate()
     {
-        if($char_month)
-        {
-             return $this->format ( 'F d Y' );
-        }
+       // $this->setTimestamp($timestamp);
+     
+             return $this->format( 'F d Y' );
+        
         switch ($style)
          {
             case 'american':
@@ -438,11 +438,11 @@ class CustomDateTime extends DateTime
         return $this->format ( 'l, F jS, Y' );
     }
 }
-try
+/*try
 {
     $cdt = new CustomDateTime();
     echo $cdt->getDate();
 }catch(Exception $e)
 {
     echo $e->getMessage();
-}
+}*/
