@@ -33,9 +33,9 @@ class Profile extends CommonQueries
     public function login($password, $email)
     {
 
-        if( empty( parent::fetchOneRowWithCond('password', $password) )
-        {
-            //
-        }
+        // if( empty( parent::fetchOneRowWithCond('password', $password) )
+        // {
+        //     //
+        // }
     }
 }
