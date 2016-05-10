@@ -13,8 +13,8 @@ date_default_timezone_set("America/Chicago");
 error_reporting(-1);
 session_start();
 
-$_SESSION['session_user_id'] = 1;
-$_SESSION['username'] = 'Jane';
+Session::set('user_id', 1);
+Session::set('username', 'Stefany');
 $handleExceptions = new HandleExceptions($mode);
 ?>
 <!DOCTYPE html>

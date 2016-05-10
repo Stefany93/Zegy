@@ -5,10 +5,9 @@
         protected $errors = array();
         protected $required = array();
         protected $missing = array();
-        function ___construct($data, $superglobal)
+        function ___construct($superglobal)
         {
            $this->data = $_POST;
-          // print_r($this->data);
         }
         public function setRequired($req)
         {
@@ -33,7 +32,6 @@
             }
            if( !$data or is_null($data) )
            {
-                var_dump($data);
                 throw new Exception("String is not numeric!");
            }else
            {
@@ -45,6 +43,13 @@
           if(strlen($this->data[$fieldName]) < $min or strlen($this->data[$fieldName]) > $max )
           {
             $this->errors[$fieldName] = sprintf(" must be longer than %s and shorter than %s ",  $min, $max);            
+          }
+        }
+        public function checkEmail($fieldName)
+        {
+          if(!filter_var($this->data[$fieldName], FILTER_VALIDATE_EMAIL))
+          {
+            $this->errors[$fieldName] = sprintf(" is invalid!");            
           }
         }
         public function checkMissing( $exceptions_array = array())

@@ -26,4 +26,16 @@ class Profile extends CommonQueries
     {
         return parent::fetchAllsCond('receiver_id', $this->userId);
     }
+    public function register($values_array, $num_values)
+    {
+        return parent::insert($values_array, $num_values);
+    }
+    public function login($password, $email)
+    {
+
+        if( empty( parent::fetchOneRowWithCond('password', $password) )
+        {
+            //
+        }
+    }
 }

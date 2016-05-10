@@ -17,25 +17,29 @@ try
     $profile->setTable('users');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
-    $data = array('comment' => $_POST['comment'], 'user_id' => 1, 'topic_id' => $posts->getPostId(), 'date_posted' => time());
 
-    $validate = new Validate('lol', 'post');
-    $validate->setData($data);
-    $validate->setRequired( array('comment') );
-    $validate->checkMissing( array('url') );
-    $validate->checkLength( 'comment', 5, 10 );
+        $customDateTime = new CustomDateTime();
 
-    $customDateTime = new CustomDateTime();
-   
-     $customDateTime->setTimestamp($date);
-
-    foreach ($validate->getErrors() as $error)
-     {
-        printf('<p class="error"> %s </p>', $error);
-    }
-    if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $comments->insertComment($data, count($data));
+        $data = array('comment' => $_POST['comment'], 'user_id' => Session::get('user_id'), 'topic_id' => $posts->getPostId(), 'date_posted' => time());
+        $validate = new Validate( 'post');
+        $validate->setData($data);
+        $validate->setRequired( array('comment') );
+        $validate->checkMissing( array('url') );
+        $validate->checkLength( 'comment', 5, 10 );
+
+         $customDateTime->setTimestamp($date);
+        if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
+        {
+            $comments->insertComment($data, count($data));
+        }else
+        {
+            foreach ($validate->getErrors() as $error)
+            {
+                printf('<p class="error"> %s </p>', $error);
+            }
+        }
     }
 
 }catch(Exception $e)
@@ -52,7 +56,7 @@ try
     {
        // var height_of_topic = document.getElementById('general_topic').offsetHeight;
         //document.getElementById('poster_info').style.height = height_of_topic+'px';
-    }
+    }   
     </script>
     <article id="general_topic">
         <h1 id="single_topic"><?php echo $title ?></h1>
