@@ -59,7 +59,7 @@ $handleExceptions = new HandleExceptions($mode);
 
     </form> -->
        
-    <div id="greeting" class="right">Hello <?php echo Links::makeLink('user', array($_SESSION['username'], $_SESSION['session_user_id']), $_SESSION['username'] ); ?>
+    <div id="greeting" class="right">Hello <?php echo Links::makeLink('user', array($_SESSION['username'], $_SESSION['user_id']), $_SESSION['username'] ); ?>
   <a href="inbox"><i class="genericon genericon-mail"></i></a>
   </div>      
 

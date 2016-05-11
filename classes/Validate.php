@@ -71,6 +71,14 @@
             $this->errors['login'] = sprintf(" wrong password/username combination!");
           }
         }
+        public function checkAlphaNumeric($fieldName)
+        {
+          $re = "/^[a-z]+[a-z0-9]*$/i";
+          if( !preg_match($re, $this->data[$fieldName]) )
+          {
+            $this->errors[$fieldName]  = sprintf( " must  start with a letter and contain only numbers & leters!");
+          }
+        }
         protected function formatErrors($array)
         {
           array_walk($array, function(&$value, $key){

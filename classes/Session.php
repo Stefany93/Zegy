@@ -12,7 +12,17 @@
                 throw new Exception("No such session name exists! >> ".$sessionName. " <<");
             }else
             {       
-                return $_SESSION[$sessionName];
+                return htmlentities($_SESSION[$sessionName]);
             }
+       }
+       public static function rememberInput($inputName)
+       {
+          if(isset($_POST[$inputName]))
+          {
+            return htmlentities($_POST[$inputName]);
+          }else
+          {
+            return '';
+          }
        }
     }

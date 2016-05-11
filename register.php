@@ -10,7 +10,8 @@ try
         $validate->setRequired( array('username', 'password', 'email', 'country') );
         $validate->checkMissing( array('url') );
         $validate->checkLength( 'username', 2, 15 );
-        $validate->checkLength( 'password', 5, 100000);
+        $validate->checkLength( 'password', 5, 100000 );
+        $validate->checkAlphaNumeric( 'username' );
         $validate->checkEmail( 'email' );
 
         if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
@@ -36,14 +37,15 @@ try
   <hr></hr>
   <form action="" method="post" id="register">
   		<label>Nickname <span>*</span>:
-  		 	<input type="text" name="username" maxlength="30" id="username" required/>
+  		 	<input type="text" name="username" maxlength="30" id="username"  value="<?php echo Session::rememberInput('username'); ?>" required/>
   		</label>
-  		<label for="">Country:<span>*</span><select name="" class="long_input" id="country">
-  				<option value="Kenya">Kenya</option>
+  		<label for="">Country:<span>*</span><select name="country" class="long_input" value="<?php echo Session::rememberInput('country'); ?>" id="country">
+          <option value="Kenya">Kenya</option>
+  				<option value="France">France</option>
   			</select>
   		</label>
   		<label>Email: <span>*</span>:
-  		 	<input type="text" name="email" maxlength="266" id="email" required/>
+  		 	<input type="text" name="email" maxlength="266" id="email" value="<?php echo Session::rememberInput('email'); ?>" required/>
   		</label>
   		<label>Password <span>*</span>:
   		 	<input type="password" name="password"  class="long_input" id="password" required/>
