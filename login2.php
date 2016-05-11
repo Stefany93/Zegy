@@ -1,14 +1,33 @@
 <?php
 include 'html/header.php';
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$post = $_POST;
-	if(check_all_fields_empty($post)){
-		user_login($post['username'], $post['password'], $db);
-	}else{
-		print '<h2 class="text-danger">Моля попълнете всички полета!</h2>';
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		$data = $_POST;
+		$profile = new Profile();
+		$profile->setTable('users');
+	//	var_dump();
+
+		$validate = new Validate();
+		$validate->setData($data);
+		$validate->checkEmail('email');
+		$validate->checkLength('password', 5, 1000);
+		$validate->checkLogin($profile->login($data['password'], $data['email']));
+		if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
+        {
+        	$id = $profile->login($data['password'], $data['email']);
+        	$user_data = $profile->setUserId($id);
+        	Session::set('user_id',$user_data['id']);
+        	Session::set('username',$user_data['username']);
+        	header('Location: /home');
+        }else
+        {
+            foreach ($validate->getErrors() as $error)
+            {
+                printf('<p class="error"> %s </p>', $error);
+            }
+        }    	
 	}
-}
 ?>
 	<style>
 		body{
@@ -63,8 +82,8 @@ include 'html/header.php';
 		<form action="" method="post" role="form" id="search_form">
 			<h1>Sign In</h1>
 			<div class="form-group">
-				<input type="text" name="username" class="form-control" placeholder="Username" value="stefany">
-				<input type="password" name="password" class="form-control" placeholder="Password" value="">
+				<input type="text" name="email" class="form-control" placeholder="Username" value="stefany.dyulgerova@gmail.com">
+				<input type="password" name="password" class="form-control" placeholder="Password" value="password1">
 				<input type="submit" value="LOGIN"  class="btn btn-primary">
 			</div>
 		</form>

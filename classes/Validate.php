@@ -64,6 +64,13 @@
                 }
               }
         }
+        public function checkLogin($loginMethod)
+        {
+          if(!$loginMethod)
+          {
+            $this->errors['login'] = sprintf(" wrong password/username combination!");
+          }
+        }
         protected function formatErrors($array)
         {
           array_walk($array, function(&$value, $key){
