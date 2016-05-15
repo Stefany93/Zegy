@@ -3,33 +3,48 @@
 try 
 {
     
-
+    // Posts
     $posts = new Posts();
     $posts->setTable("posts");
     $posts->setPostId( Validate::isNumericString('topic_id', 'get') );
     extract( $posts->getTopic("id") );
 
+    // Comments
     $comments = new Comments();
     $comments->setTable('reactions');
     $comments->setPostId($id);
 
+    // Profile
     $profile = new Profile();
     $profile->setTable('users');
     $profile->setUserId($author_id);
     extract($profile->getUserInfo());
 
-        $customDateTime = new CustomDateTime();
+    //CustomDateTime
+    $customDateTime = new CustomDateTime();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
+        /*
+            Construct the input array with $data
+        */
         $data = array('comment' => $_POST['comment'], 'user_id' => Session::get('user_id'), 'topic_id' => $posts->getPostId(), 'date_posted' => time());
+        /*
+            Start Validation...
+        */
         $validate = new Validate( 'post');
         $validate->setData($data);
         $validate->setRequired( array('comment') );
         $validate->checkMissing( array('url') );
         $validate->checkLength( 'comment', 5, 10 );
-
+        /*
+            End validation...
+        */
          $customDateTime->setTimestamp($date);
+
+         // If there are no errors or input missing,
+         // then insert the comment. Otherwise display the errors and the missing input.
+
         if(empty($validate->getMissing() )  and empty($validate->getErrors() ) )
         {
             $comments->insertComment($data, count($data));
@@ -87,9 +102,7 @@ try
 
         <?php   
         /*
-             Start the foreach loop to display all comments related to the article.
-             The function display_comments is in functions.php document.
-             The function returns an array that holds absolutely all comments for that article.
+             Display commments
         */
            if( $comments->countComments() > 0 )
             {
@@ -126,7 +139,6 @@ try
             <textarea rows="10" cols="50" id="text_comment"  name="comment"></textarea>
             <br>
             <input type="submit" name="commented" id="comments_button" value="Publish Comment" /> 
-        <!--        <input type="hidden" name="post_id" value="<?php //print $this_fuking_post; ?>" /> -->
             <label for="" class="secret"> Do not populate this field<input type="text" name="url" /></label>
         </fieldset>
         <!-- End of comment form -->
