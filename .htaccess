@@ -41,6 +41,7 @@ RewriteRule ^(topic)/.*/([0-9]+)$ single_$1.php?topic_id=$2 [L]
 RewriteRule ^(private)-(messages)/.*([0-9]+)$ $1_$2.php?id=$3
 RewriteRule ^user/.*([0-9]+)$ profile.php?id=$1
 RewriteRule ^([0-9]+)/.* topics.php?category_id=$1
+RewriteRule ^new-topic/([0-9]+) new-topic.php?category_id=$1
 
 # Here we re - write the ?blog_post=? query strings
 # because the way they are now is just plain lame...

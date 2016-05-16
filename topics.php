@@ -32,7 +32,7 @@ try
 	{
  ?>
 		<div id="breadcrump"></div>
-
+	<p> <?php echo Links::makeLink('new-topic', $posts->getCategoryId(), 'New Topic'); ?>  </p>
 		<table id="first_page">
 	
 		<tr>
