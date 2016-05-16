@@ -94,6 +94,34 @@
         {
           return $this->formatErrors( $this->errors );
         }
+        protected function loopErrors($errorsArray)
+        {
+          $allErrors = '';
+          foreach ($errorsArray as $error) 
+          {
+            $allErrors .=  sprintf('<p class="error"> %s </p>', $error);
+          }
+          return $allErrors;
+        }
+        public function presentErrors()
+        {
+          if( empty( $this->getMissing() ) and empty( $this->getErrors() ) )
+          {
+            return false;
+          }
+          return true;
+        }
+        public function returnErrorsOrMissing()
+        {
+          if( !empty($this->getMissing() ))
+          {
+            return $this->loopErrors( $this->getMissing() );
+          }
+          if( !empty($this->getErrors() ))
+          {
+            return $this->loopErrors( $this->getErrors() );
+          }
+        }
     }
 
 
