@@ -4,16 +4,16 @@ try
 {
      if($_SERVER['REQUEST_METHOD'] == 'POST')
      {
-                        $posts = new Posts();
-                $posts->setTable("posts");
-                $posts->setCategoryId( Validate::isNumericString('category_id', 'get') );
+        $posts = new Posts();
+        $posts->setTable("posts");
+        $posts->setCategoryId( Validate::isNumericString('category_id', 'get') );
         //     
          /*
              Construct the input array with $data
          */
-            $data = array('title' => $_POST['title'], 'contents' => $_POST['contents']
+        $data = array('title' => $_POST['title'], 'contents' => $_POST['contents']
                         , 'author_id' => Session::get('user_id'), 'category_id' => $posts->getCategoryId()
-                        , 'date' => time() );    
+                        , 'date' => time(), 'last_post' => time() );    
 
           /*
              Start Validation...
@@ -48,10 +48,10 @@ try
     <form action="" method="post">
         <label for="title">
             Title: 
-            <input type="text" name="title" id="title"  value="<?php echo Session::rememberInput('title')?>"  />
+            <input type="text" name="title" id="title"  value="<?php echo Session::rememberInput('title')?>"  required />
         </label>
         <label for="contents">Contents: <br>
-            <textarea name="contents" id="contents" cols="30" rows="10" ><?php echo trim(Session::rememberInput('contents')); ?></textarea>
+            <textarea name="contents" id="contents" cols="30" rows="10" required ><?php echo trim(Session::rememberInput('contents')); ?></textarea>
         </label> 
         <input type="submit" />
     </form>

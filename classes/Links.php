@@ -1,6 +1,4 @@
 <?php
-// http://dev.zegy/single_topic.php?topic_id=1
-// http://historum.com/american-history/105226-american-intellectuals.html
     class Links
     {
 
@@ -28,9 +26,3 @@
             return strtolower(preg_replace($pattern, $replacements, $subject));
         }
     }
-/*
-        }
-    }
-
-    $f = new Links;
-    */
