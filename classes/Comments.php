@@ -28,5 +28,8 @@
         {
             return parent::insert($values_array, $num_values);
         }
-
+        public function getComment()
+        {
+            return parent::fetchOneColumn('id', $this->getCommentId() );
+        }
     }

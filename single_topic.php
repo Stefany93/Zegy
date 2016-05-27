@@ -121,8 +121,8 @@ try
                             <?php echo $comment['comment']; ?>
                         </p>
                         <ul id="options">
-                            <li><a href="#">Report</a></li>
-                            <li><a href="#">Quote</a></li>
+                            <li><a href="/?comment_id=<?php echo $comment['id']; ?>">Report</a></li>
+                            <li><a href="topic/new-topic/47/?quote_id=<?php echo $comment['id']; ?>">Quote</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -136,7 +136,15 @@ try
             <label>
                 What's your opinion...:<br /> 
             </label>
-            <textarea rows="10" cols="50" id="text_comment"  name="comment"></textarea>
+            <textarea rows="10" cols="50" id="text_comment"  name="comment">
+                <?php if( isset($_GET['quote_id']) )
+                        {
+                            $comments->setCommentId(Validate::isNumericString('quote_id', 'get') );
+                            print_r($comments->getComment() );
+
+                        }
+                ?>
+            </textarea>
             <br>
             <input type="submit" name="commented" id="comments_button" value="Publish Comment" /> 
             <label for="" class="secret"> Do not populate this field<input type="text" name="url" /></label>
