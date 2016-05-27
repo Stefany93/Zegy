@@ -3,7 +3,7 @@ include 'html/header.php';
 try{
 $profile = new Profile();
 $profile->setTable('private_messages');
-$profile->setUserId(Validate::isNumericString($_SESSION['session_user_id']));
+$profile->setUserId(Validate::isNumericString(Session::get('user_id')));
 ?>
 <article>
     <h1>Private Messages</h1>

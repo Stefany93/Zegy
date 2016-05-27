@@ -9,7 +9,8 @@
        {
             if( !isset($_SESSION[$sessionName]) )
             {
-                throw new Exception("No such session name exists! >> ".$sessionName. " <<");
+               // throw new Exception("No such session name exists! >> ".$sessionName. " <<");
+                return false;
             }else
             {       
                 return htmlentities($_SESSION[$sessionName]);

@@ -1,4 +1,7 @@
 <?php 
+session_start();
+// Report all PHP errors
+error_reporting(-1);
 require 'config/constants.php'; 
 require 'config/global_vars.php'; 
 date_default_timezone_set("America/Chicago");
@@ -9,12 +12,12 @@ date_default_timezone_set("America/Chicago");
     }
     });
 
-// Report all PHP errors
-error_reporting(-1);
-session_start();
 
+
+/*
 Session::set('user_id', 1);
-Session::set('username', 'Stefany');
+Session::set('username', 'Stefany');*/
+echo Session::get('username');
 $handleExceptions = new HandleExceptions($mode);
 ?>
 <!DOCTYPE html>
@@ -59,7 +62,7 @@ $handleExceptions = new HandleExceptions($mode);
 
     </form> -->
        
-    <div id="greeting" class="right">Hello <?php echo Links::makeLink('user', array($_SESSION['username'], $_SESSION['user_id']), $_SESSION['username'] ); ?>
+    <div id="greeting" class="right">Hello <?php echo Links::makeLink('user', array(Session::get('username'), Session::get('user_id')), Session::get('username') ); ?>
   <a href="inbox"><i class="genericon genericon-mail"></i></a>
   </div>      
 

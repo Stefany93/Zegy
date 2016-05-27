@@ -24,7 +24,15 @@ class Profile extends CommonQueries
     }
     public function listPrivateMessages()
     {
-        return parent::fetchAllsCond('receiver_id', $this->userId);
+        return parent::fetchAllsCond('receiver_id', $this->userId, '=', 'ORDER BY id DESC');
+    }
+    public function viewPM($pm_id)
+    {   
+        return parent::fetchOneRowWithCond('id', $pm_id, '=');
+    }
+    public function sendPrivateMessage($data, $count_data)
+    {
+        return parent::insert($data, $count_data);
     }
     public function register($values_array, $num_values)
     {

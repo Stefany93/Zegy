@@ -8,7 +8,7 @@ class CommonQueries extends StartDB
     {
         $this->table = $table;
     }
-    protected function getTable()
+    public function getTable()
     {
         return $this->table;
     }
@@ -109,6 +109,8 @@ class CommonQueries extends StartDB
     {
         print_r($values_array);
         $k = (array_keys($values_array));
+        print_r(
+            $k);
         $ki =  implode(',', $k);
         $question_marks = array_fill(1, $num_values, '?');
         $question_marks_string =  implode(',', $question_marks);
