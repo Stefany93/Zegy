@@ -162,6 +162,48 @@ class CommonQueries extends StartDB
 
     }
 
+    public function update($values_array, $num_values)
+    {
+        print_r($values_array);
+        $k = (array_keys($values_array));
+
+        $update_query = 'SET';
+
+        foreach ($values_array as $key => $value) 
+        {
+            if($num_values > 1)
+            {
+                $update_query .= $key.'= ?,'; 
+            }else
+            {
+                $update_query .= $key.'= ?';
+            }
+        }
+ $ki =  implode(',', $k);
+        $question_marks = array_fill(1, $num_values, '?');
+        $question_marks_string =  implode(',', $question_marks);
+        $i = 0; 
+        $sql = sprintf("UPDATE $this->table SET  %s(%s) VALUES(%s)",  $this->table, $ki, $question_marks_string);
+       $query = $this->newQuery();
+        $prepare = $query->prepare($sql);
+        if(!is_object($prepare))
+        {
+            throw new Exception("Could not execute the query!  $sql", 1);
+            
+        }
+        foreach ($values_array as &$value) {
+            $i++;
+            $prepare->bindParam($i, $value);
+        }
+        if(!$prepare->execute())
+        {
+            throw new Exception("Could not execute an insert query! $sql", 1);
+            
+        }
+
+    }
+
+
     // Delete
 
     public function delete($condition1, $condition2, $operator = '=')

@@ -9,11 +9,19 @@
             $this->commentId = $commentId;
         }
 
-         public function setpostId($postId)
+        public function getCommentId()
+        {
+           return $this->commentId;
+        }
+
+         public function setPostId($postId)
         {
             $this->postId = $postId;
         }
-
+         public function getPostId()
+        {
+           return $this->postId;
+        }
         public function getComments()
         {
             return parent::fetchAllsCond('topic_id', $this->postId);
@@ -30,6 +38,6 @@
         }
         public function getComment()
         {
-            return parent::fetchOneColumn('id', $this->getCommentId() );
+            return parent::fetchOneColumn('id', $this->getCommentId(), 'comment' );
         }
     }

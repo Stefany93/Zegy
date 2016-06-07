@@ -117,12 +117,12 @@ try
                             $customDateTime->setTimestamp($comment['date_posted']);
                          ?>
                         <h5><?php echo $customDateTime->getForumDate(); ?></h5>
-                        <p>
+                        <p class="comment_<?php echo $comment['id']?>">
                             <?php echo $comment['comment']; ?>
                         </p>
                         <ul id="options">
                             <li><a href="/?comment_id=<?php echo $comment['id']; ?>">Report</a></li>
-                            <li><a href="topic/new-topic/47/?quote_id=<?php echo $comment['id']; ?>">Quote</a></li>
+                            <li><a href=<?php echo 'new-reply.php?topic_id='.$_GET['topic_id'].'&quote='.$comment['id']; ?> >Quote</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -131,6 +131,43 @@ try
             }
         
          ?>
+         <script type="text/javascript">
+            
+            function argumentsSupplied(argument)
+            {
+                if(argument == undefined)
+                {
+                    return false;
+                }
+                return true;
+            }
+            function classExists(class_name)
+            {
+                if (document.querySelector('.'+class_name) == null) 
+                {
+                  return false;
+                }
+                return true;
+            }
+
+            function fetchClasses(class_name)
+            {
+                if(argumentsSupplied(class_name) == false)
+                {
+                    console.log('Function ' + this.constructor.name + ' requires an argument');
+                }
+                if(!classExists(class_name))
+                {
+                    console.log('Class name of ' + class_name + ' does not exist!');
+                }
+
+                return classes = document.getElementsByClassName(class_name);
+            }
+
+
+            
+
+         </script>
         <form method="post" action="" id="comment_form" >
         <fieldset>
             <label>

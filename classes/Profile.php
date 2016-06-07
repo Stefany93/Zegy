@@ -48,7 +48,8 @@ class Profile extends CommonQueries
             {
                 return false;
             }else
-            {
+            {   
+                parent::update( array('logged_in'), 1 );
                 return parent::fetchOneRowWithCond('password', $password)['id'];
             }
 
