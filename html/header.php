@@ -11,13 +11,6 @@ date_default_timezone_set("America/Chicago");
       include 'classes/' . $class . '.php';
     }
     });
-
-
-
-/*
-Session::set('user_id', 1);
-Session::set('username', 'Stefany');*/
-echo Session::get('username');
 $handleExceptions = new HandleExceptions($mode);
 ?>
 <!DOCTYPE html>
