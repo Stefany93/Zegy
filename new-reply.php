@@ -48,7 +48,6 @@ try
             }
         }
     }
-
 }catch(Exception $e)
 {
    echo $handleExceptions->parseException($e);
