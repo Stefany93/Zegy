@@ -36,7 +36,7 @@ try
         $validate->setData($data);
         $validate->setRequired( array('comment') );
         $validate->checkMissing( array('url') );
-        $validate->checkLength( 'comment', 5, 10 );
+        $validate->checkLength( 'comment', 5, 10000 );
         /*
             End validation...
         */

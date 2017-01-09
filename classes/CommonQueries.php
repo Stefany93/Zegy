@@ -2,8 +2,11 @@
 class CommonQueries extends StartDB
 {
     protected $table;
-
-
+     const SELECT = "SELECT";
+     const UPDATE = "UPDATE";
+     const INSERT = "INSERT INTO";
+     const FROM = "FROM";
+     const WHERE = "WHERE";
     public function setTable($table)
     {
         $this->table = $table;
@@ -34,6 +37,19 @@ class CommonQueries extends StartDB
         {
             throw new Exception($this->exceptionMessage()['empty']);
         }
+
+    }
+    public function columns(array $columns)
+    {
+        return $columns;
+    }
+    public function where(array $parameters, string $operator)
+    {
+        return self::WHERE. 
+    }
+    public function test()
+    {
+        echo self::SELECT .join($this->columns(array('id', 'title'), ',')) .self::FROM. $this->getTable();
     }
     public function fetchAllsCond($where, $condition, $operator = '=', $orderBy = null)
     {

@@ -16,7 +16,6 @@ try
 	$comments->setTable('reactions');
 
 	// Profile
-
 	$profile = new Profile();
 	$profile->setTable('users');
 
@@ -27,6 +26,8 @@ try
 {
 	$handleExceptions->parseException($e);
 }
+echo 'test';
+echo $posts->test();
 	// Check if there are any topics in the selected category
 	if ($topics) 
 	{

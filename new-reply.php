@@ -32,7 +32,7 @@ try
         /*
             End validation...
         */
-         $customDateTime->setTimestamp($date);
+         $customDateTime->setTimestamp(time());
 
          // If there are no errors or input missing,
          // then insert the comment. Otherwise display the errors and the missing input.
